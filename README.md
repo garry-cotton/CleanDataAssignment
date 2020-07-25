@@ -17,8 +17,9 @@ Summarized Data
 The included script run_analysis.R takes the original files as input and outputs a summarized long dataset on a subset of features. Data from both the test and training set are joined together.
 
 The script takes as arguments:
-**data_directory**: the path to the base UCI HAR Dataset folder.
-**arrange**: whether the output dataset should be arranged by subject, activity and feature.
+
+- **data_directory**: the path to the base UCI HAR Dataset folder.
+- **arrange**: whether the output dataset should be arranged by subject, activity and feature.
 
 Only mean and standard deviation features are retained (ie. tBodyAcc-mean()-X, fBodyAccJergMag-std(), etc.). Additional features including the word mean but not explicitly indicating the function mean() were dropped. This is due to the possibility of these features including additional calculation or transformation beyond simply providing the mean average value.
 
