@@ -17,14 +17,14 @@ A brief description of each of the features found in the Features column can be 
 
 Features were recorded over time intervals of 50Hz but also then subjected to a FFT (Fast Fourier Transform).
 
-| Prefix  |
+| Prefix  | Description
 |---      |---
 | t       | Time domain signal captured at a rate of 50Hz.
 | f       | Transformed signal by applying FFT
 
 Additionally, each feature is measured across three axes and on overall magnitude. These separate measurements are indicated by the feature suffix.
 
-| Suffix    |
+| Suffix    | Description
 |---        |---
 | X         | Quantity along the x-axis.
 | Y         | Quantity along the y-axis.
