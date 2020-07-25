@@ -19,7 +19,7 @@ get_summary_data <- function(data_directory = getwd(), arrange=TRUE)
 
   # Get test data
   suppressWarnings({test_data = readr::read_table("test\\X_test.txt", col_names=features)})
-  test_data = test_data[,grep("mean|std", names(test_data))]
+  test_data = test_data[,grep("mean\\(\\)|std\\(\\)", names(test_data))]
   test_activities = read.table("test\\y_test.txt", sep=" ", col.names="ActivityID")
   test_data = cbind(test_data, test_activities)
   rm(test_activities)
@@ -31,7 +31,7 @@ get_summary_data <- function(data_directory = getwd(), arrange=TRUE)
   
   # Get train data
   suppressWarnings({train_data = readr::read_table("train\\X_train.txt", col_names=features)})
-  train_data = train_data[,grep("mean|std", names(train_data))]
+  train_data = train_data[,grep("mean\\(\\)|std\\(\\)", names(train_data))]
   train_activities = read.table("train\\y_train.txt", sep=" ", col.names="ActivityID")
   train_data = cbind(train_data, train_activities)
   rm(train_activities)
@@ -51,7 +51,6 @@ get_summary_data <- function(data_directory = getwd(), arrange=TRUE)
   
   # Variable renaming
   cols = names(full_data)
-  cols = gsub("meanFreq\\(\\)", "MeanFrequency", cols)
   cols = gsub("mean\\(\\)", "Mean", cols)
   cols = gsub("std\\(\\)", "StandardDev", cols)
   cols[grep("Mag-", cols)] = paste0(gsub("Mag-", "-", cols[grep("Mag-", cols)]), "-Magnitude")
@@ -60,16 +59,28 @@ get_summary_data <- function(data_directory = getwd(), arrange=TRUE)
   cols = gsub("-", "_", cols)
   names(full_data) = cols
   metric_cols = setdiff(names(full_data), dim_cols)
-  
+
   # Summarize data
   full_data = full_data %>% 
-    gather_("Variable", "Value", metric_cols) %>% 
-    group_by(SubjectID, ActivityName, Variable) %>% 
-    summarize(MeanValue = mean(Value))
+    gather_("Feature", "Value", metric_cols) %>% 
+    group_by(SubjectID, ActivityName, Feature) %>% 
+    summarize(AverageValue = mean(Value))
+  
+  # Split data between mean and std features and normalize feature names
+  mean_data = full_data[with(full_data, grep("_Mean", Feature)),]
+  mean_data = rename(mean_data, AverageMean = AverageValue)
+  mean_data["Feature"] = with(mean_data, gsub("_Mean", "", Feature))
+
+  std_data = full_data[with(full_data, grep("_StandardDev", Feature)),]
+  std_data = rename(std_data, AverageStd = AverageValue)
+  std_data["Feature"] = with(std_data, gsub("_StandardDev", "", Feature))
+  
+  # Re-merge
+  full_data = merge(mean_data, std_data, by=c("SubjectID", "ActivityName", "Feature"))
   
   # Arrange if required
   if (arrange)
-    full_data = arrange_(full_data, c("SubjectID", "ActivityName", "Variable"))
+    full_data = arrange_(full_data, c("SubjectID", "ActivityName", "Feature"))
   
   # Reset working directory and return data
   setwd(existing_folder)
