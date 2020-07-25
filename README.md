@@ -14,7 +14,11 @@ ____
 Summarized Data
 =====
 
-The included script run_analysis.R takes the original files as input and outputs a summarized long dataset on a subset of features. Data from both the test and training set are joined together. 
+The included script run_analysis.R takes the original files as input and outputs a summarized long dataset on a subset of features. Data from both the test and training set are joined together.
+
+The script takes as arguments:
+**data_directory**: the path to the base UCI HAR Dataset folder.
+**arrange**: whether the output dataset should be arranged by subject, activity and feature.
 
 Only mean and standard deviation features are retained (ie. tBodyAcc-mean()-X, fBodyAccJergMag-std(), etc.). Additional features including the word mean but not explicitly indicating the function mean() were dropped. This is due to the possibility of these features including additional calculation or transformation beyond simply providing the mean average value.
 
@@ -33,7 +37,7 @@ Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTA
 
 The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain. 
 
-Please see 'original_features_info.txt' for more details.
+Again, please check code_book.md for more details.
 
 ### For each record it is provided:
 
