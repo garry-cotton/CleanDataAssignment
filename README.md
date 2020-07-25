@@ -11,6 +11,13 @@ www.smartlab.ws
 
 ____
 
+Data Location
+=====
+
+The required data can be found at this URL: https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
+Please download and extract the data as a first step, noting the path to the base folder named UCI HAR Dataset. This path will be required for executing the script run_analysis.R
+
 Summarized Data
 =====
 
