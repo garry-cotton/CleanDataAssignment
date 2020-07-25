@@ -3,6 +3,7 @@ Code Book
 
 Below is a description of each of the fields in the summarized data set.
 
+
 Field Name      Description
 SubjectID       Unique identifier number for a given subject in the experiment. In total, there are 30 individual subjects.
 ActivityName    The name of the activity measured for the given record. The activities are WALKING, WALKING_UPSTAIRS,
