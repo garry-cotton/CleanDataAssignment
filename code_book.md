@@ -15,7 +15,7 @@ Below is a description of each of the fields in the summarized data set. Please 
 
 A brief description of each of the features found in the Features column can be found below. Each feature can be broken down by a prefix, name and suffix. We first document the meaning of the prefixes and suffixes used and then go onto the basic feature names:
 
-Features were recorded over time intervals of 50Hz but also then subjected to a FFT (Fast Fourier Transform).
+Features were recorded over time intervals of 50Hz. Additional features were created by applying a subsequent FFT (Fast Fourier Transform).
 
 | Prefix  | Description
 |---      |---
